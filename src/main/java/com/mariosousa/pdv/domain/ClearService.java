@@ -23,7 +23,7 @@ public class ClearService implements Serializable{
 
 	}
 
-	public ClearService(String name, Double price) {
+	public ClearService(Integer id, String name, Double price) {
 		this.name = name;
 		this.price = price;
 	}
