@@ -1,12 +1,17 @@
 package com.mariosousa.pdv.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Product implements Serializable{
@@ -18,6 +23,10 @@ public class Product implements Serializable{
 	private Integer id;
 	private String name;
 	private Double price;
+	
+	@JsonManagedReference
+	@ManyToMany(mappedBy = "products")
+	private List<Sale> sales = new ArrayList<>();
 	
 	public Product() {
 	}
@@ -51,6 +60,14 @@ public class Product implements Serializable{
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
+	public List<Sale> getSales() {
+		return sales;
+	}
+
+	public void setSales(List<Sale> sales) {
+		this.sales = sales;
+	}
 
 	@Override
 	public int hashCode() {
@@ -68,7 +85,5 @@ public class Product implements Serializable{
 		Product other = (Product) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 
 }

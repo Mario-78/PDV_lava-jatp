@@ -1,4 +1,4 @@
-package com.mariosousa.pdv.service;
+package com.mariosousa.pdv.services;
 
 import java.util.Optional;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mariosousa.pdv.domain.ClearService;
 import com.mariosousa.pdv.repositories.ClearServiceRepository;
+import com.mariosousa.pdv.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClearServiceService {
@@ -18,7 +19,7 @@ public class ClearServiceService {
 		
 		Optional<ClearService> obj = repo.findById(id);
 		
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! " + id + ", tipo: " + ClearService.class.getName()));
 		
 	}
 
